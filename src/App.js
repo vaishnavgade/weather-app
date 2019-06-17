@@ -37,6 +37,17 @@ class App extends React.Component{
 
   };
 
+  retrieveWeather = async(city, country) => {
+    // api call to get only a single point of weather data
+    // const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${Open_Weather_Map_Key}`);
+
+    // api call to get 5 day/ 3 hour forecast data
+    const api_call = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&units=${this.state.unit}&appid=${Open_Weather_Map_Key}`);
+    const response = await api_call.json();
+    
+    return response;
+  };
+
   getWeather = async(e) =>{
     // Prevents the full page refresh that occurs by default
     e.preventDefault();
@@ -44,13 +55,7 @@ class App extends React.Component{
     const city = e.target.elements.city.value;
     const country = e.target.elements.country.value;
 
-    // api call to get only a single point of weather data
-    // const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${Open_Weather_Map_Key}`);
-
-    // api call to get 5 day/ 3 hour forecast data
-    const api_call = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&units=${this.state.unit}&appid=${Open_Weather_Map_Key}`);
-
-    const response = await api_call.json();    
+    const response = await this.retrieveWeather(city, country);    
 
     // Don't set the state unless user enters both city and country
     if(city && country){
