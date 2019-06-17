@@ -31,14 +31,22 @@ class App extends React.Component{
 
     const response = await api_call.json();
 
-    this.setState({
-      temperature: response.main.temp,
-      city: response.name,
-      country: response.sys.country,
-      humidity: response.main.humidity,
-      description: response.weather[0].description,
-      error: ""
-    });
+    // Don't set the state unless user enters both city and country
+    if(city && country){
+      this.setState({
+        temperature: response.main.temp,
+        city: response.name,
+        country: response.sys.country,
+        humidity: response.main.humidity,
+        description: response.weather[0].description,
+        error: ""
+      });
+    }
+    else{
+      this.setState({
+        error: "Please enter both city and country"
+      });
+    }
 
     console.log(response);
   };
