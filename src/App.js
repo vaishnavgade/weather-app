@@ -48,7 +48,7 @@ class App extends React.Component{
     // const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${Open_Weather_Map_Key}`);
 
     // api call to get 5 day/ 3 hour forecast data
-    const api_call = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&units=${this.state.unit}&appid=${Open_Weather_Map_Key}`);
+    const api_call = await fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&units=${this.state.unit}&appid=${Open_Weather_Map_Key}`);
 
     const response = await api_call.json();    
 
