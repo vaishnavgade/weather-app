@@ -67,19 +67,18 @@ button:active {
 }
 
 table {
+  align-content: center;
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 100%;
+  width: 75%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 td, th {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
-}
-
-tr:nth-child(even) {
-  background-color: #dddddd;
 }
 
 .weather_error {
