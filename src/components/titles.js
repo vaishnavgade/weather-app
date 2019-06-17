@@ -2,9 +2,8 @@ import React from 'react';
 
 const Titles = (props) => {
   return(
-    <div>
+    <div className="title-container">
       <h1>Weather App</h1>
-      <p>Helps you find Weather conditions in cities</p>
     </div>
   );
 };
