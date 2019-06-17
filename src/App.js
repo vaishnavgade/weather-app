@@ -6,16 +6,35 @@ import { async } from 'q';
 
 const Open_Weather_Map_Key = "<sign up for api key:https://openweathermap.org/api>";
 
+const units = {
+  'c':'metric',
+  'f':'imperial'
+};
+
 class App extends React.Component{
   constructor(props){
     super(props);
 
     this.state = {
+      unit: "metric",
       city: undefined,
       country: undefined,
       weatherData : {},
       error: undefined
     };
+
+    this.getTempUnits = this.getTempUnits.bind(this);
+  };
+
+  getTempUnits = (e) =>{
+    // Prevents the full page refresh that occurs by default
+    e.preventDefault();
+
+    this.setState({
+      unit: units[e.target.value],
+      error: ""
+    });
+
   };
 
   getWeather = async(e) =>{
@@ -29,7 +48,7 @@ class App extends React.Component{
     // const api_call = await fetch(`http://api.openweathermap.org/data/2.5/weather?q=${city},${country}&appid=${Open_Weather_Map_Key}`);
 
     // api call to get 5 day/ 3 hour forecast data
-    const api_call = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&units=imperial&appid=${Open_Weather_Map_Key}`);
+    const api_call = await fetch(`http://api.openweathermap.org/data/2.5/forecast?q=${city},${country}&units=${this.state.unit}&appid=${Open_Weather_Map_Key}`);
 
     const response = await api_call.json();    
 
@@ -47,15 +66,13 @@ class App extends React.Component{
         error: "Please enter both city and country"
       });
     }
-
-    console.log(response);
   };
 
   render(){
     return(
       <div>
         {/* Add Components here */}
-        <Titles />
+        <Titles getTempUnits={this.getTempUnits}/>
         <Form loadWeather={this.getWeather}/>
         <Weather 
           city={this.state.city}
