@@ -3,7 +3,7 @@ import React from 'react';
 const Weather = (props) =>{
   return(
     <div>
-      // Weather conditions goes here
+      {/* Weather conditions goes here */}
     </div>
   );
 };
