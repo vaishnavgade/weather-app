@@ -12,7 +12,18 @@ const renderTimeAndDay = (dateString) =>{
       <label>{new Intl.DateTimeFormat('en-US', {weekday: 'short'}).format(new Date(dateString))}</label>
     </div>
   );
-}
+};
+
+/**
+ * Takes an array and returns an <img> with weather icon with description for tooltip
+ * @param {Array<TYPE>} weather 
+ */
+const renderConditionIcon = (weather) => {
+    const imgSrc = `http://openweathermap.org/img/w/${weather.icon}.png`;
+    return(
+      <img src={imgSrc} alt="Weather icon" title={weather.description} />
+    );
+};
 
 const Weather = (props) =>{
   return(
@@ -36,8 +47,8 @@ const Weather = (props) =>{
               <tr className="table-rows" key={index}>
                 {/* Converting the DateTime string into a weekday */}
                 <td>{renderTimeAndDay(item.dt_txt)}</td>
-                <td>{item.weather[0].description}</td>
-                <td>{item.main.temp}</td>
+                <td>{renderConditionIcon(item.weather[0])}</td>
+                <td>{item.main.temp}<sup>o</sup></td>
                 <td>{item.main.humidity}</td>
                 <td>{item.wind.speed}</td>
               </tr>
