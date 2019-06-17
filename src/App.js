@@ -4,6 +4,7 @@ import Form from './components/form';
 import Weather from './components/weather';
 import { async } from 'q';
 
+const Open_Weather_Map_Key = "<sign up for api key:https://openweathermap.org/api>";
 
 class App extends React.Component{
 
